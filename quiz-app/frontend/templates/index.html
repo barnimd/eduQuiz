@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduQuiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">EduQuiz</div>
+        <nav class="navbar">
+            <div class="dropdown">
+                <button class="dropbtn">Quiz Kategori ▼</button>
+                <div class="dropdown-content">
+                    <a href="/quiz/math">Matematika</a>
+                    <a href="/quiz/animals">Tebak Hewan</a>
+                    <a href="/quiz/places">Tebak Lokasi</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Selamat datang di EduQuiz!</h1>
+            <p>Belajar jadi seru dengan kuis-kuis interaktif seperti Matematika, Tebak Hewan, dan Tebak Lokasi.</p>
+        </section>
+    </main>
+</body>
+</html>

@@ -22,11 +22,40 @@
         </nav>
     </header>
 
-    <main>
-        <section class="hero">
-            <h1>Selamat datang di EduQuiz!</h1>
-            <p>Belajar jadi seru dengan kuis-kuis interaktif seperti Matematika, Tebak Hewan, dan Tebak Lokasi.</p>
-        </section>
-    </main>
+    <main class="homepage-container">
+
+    <!-- Slideshow -->
+    <div class="slideshow-container">
+        <div class="slide fade"><img src="/static/img/geoguess.jpeg" alt="Slide 1"></div>
+        <div class="slide fade"><img src="/static/img/math.jpeg" alt="Slide 2"></div>
+        <div class="slide fade"><img src="/static/img/zoo.jpeg" alt="Slide 3"></div>
+
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
+
+        <div class="dots">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </div>
+
+    <!-- Leaderboard dan Lorem -->
+    <div class="bottom-section">
+        <div class="leaderboard">
+            <h3>🏆 Leaderboard</h3>
+            <ol>
+                <li>Budi - 90%</li>
+                <li>Santi - 85%</li>
+                <li>Ali - 80%</li>
+            </ol>
+        </div>
+
+        <div class="lorem-text">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+        </div>
+    </div>
+</main>
+
 </body>
 </html>

@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduQuiz</title>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <header>
-        <div class="logo">EduQuiz</div>
+        <div class="logo"><a href="{{ url_for('home') }}">eduQuiz</a></div>
         <nav class="navbar">
             <div class="dropdown">
                 <button class="dropbtn">Quiz Kategori ▼</button>

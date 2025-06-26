@@ -21,10 +21,23 @@ header {
     color: white;
 }
 
-.logo {
+.logo a {
+    text-decoration: none;
     font-size: 1.8rem;
     font-weight: bold;
+    color: #ffffff;
 }
+
+.logo a:visited {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.logo a:hover {
+    text-decoration: underline;
+    color: #021322;
+}
+
 
 .navbar .dropbtn {
     background-color: #4a90e2;
@@ -83,6 +96,7 @@ header {
     font-size: 1.2rem;
     color: #555;
 }
+
 /* Container utama untuk quiz */
 .quiz-container {
     max-width: 800px;

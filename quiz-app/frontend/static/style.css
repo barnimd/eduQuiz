@@ -245,6 +245,27 @@ header {
       box-shadow: 0 8px 30px rgba(0,0,0,0.5);
     }
 
+    .quiz-button {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4a90e2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .quiz-button:hover {
+        background-color: #357ab8;
+    }
+
+
     .slide.active {
       opacity: 1;
       transform: scale(1) translateX(0);

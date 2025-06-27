@@ -16,60 +16,19 @@
         <h2>{{ category|capitalize }} Quiz</h2>
 
         <form id="quiz-form">
-    {% if category == "math" %}
-        <!-- Soal Matematika -->
-        <div class="question-box">
-            <p>1. Berapa hasil dari 2 + 2?</p>
-            <label><input type="radio" name="q1" value="A"> A. 3</label><br>
-            <label><input type="radio" name="q1" value="B"> B. 4</label><br>
-            <label><input type="radio" name="q1" value="C"> C. 5</label>
-        </div>
+            {% for question in questions %}
+            <div class="question-box">
+                <p>{{ loop.index }}. {{ question.text }}</p>
+                {% for opt in question.options %}
+                    <label>
+                        <input type="radio" name="{{ question.name }}" value="{{ opt[0] }}"> {{ opt[0] }}. {{ opt[1] }}
+                    </label><br>
+                {% endfor %}
+            </div>
+            {% endfor %}
 
-        <div class="question-box">
-            <p>2. Berapa hasil dari 5 x 3?</p>
-            <label><input type="radio" name="q2" value="A"> A. 15</label><br>
-            <label><input type="radio" name="q2" value="B"> B. 8</label><br>
-            <label><input type="radio" name="q2" value="C"> C. 20</label>
-        </div>
-
-    {% elif category == "animals" %}
-        <!-- Soal Hewan -->
-        <div class="question-box">
-            <p>1. Hewan apa yang bisa terbang?</p>
-            <label><input type="radio" name="q1" value="A"> A. Kucing</label><br>
-            <label><input type="radio" name="q1" value="B"> B. Burung</label><br>
-            <label><input type="radio" name="q1" value="C"> C. Ular</label>
-        </div>
-
-        <div class="question-box">
-            <p>2. Hewan apa yang hidup di laut?</p>
-            <label><input type="radio" name="q2" value="A"> A. Kuda</label><br>
-            <label><input type="radio" name="q2" value="B"> B. Ikan</label><br>
-            <label><input type="radio" name="q2" value="C"> C. Kambing</label>
-        </div>
-
-    {% elif category == "places" %}
-        <!-- Soal Lokasi -->
-        <div class="question-box">
-            <p>1. Gambar ini menunjukkan tempat apa? (anggap ada gambar)</p>
-            <label><input type="radio" name="q1" value="A"> A. Sekolah</label><br>
-            <label><input type="radio" name="q1" value="B"> B. Rumah</label><br>
-            <label><input type="radio" name="q1" value="C"> C. Pasar</label>
-        </div>
-
-        <div class="question-box">
-            <p>2. Kota manakah yang merupakan ibu kota Indonesia?</p>
-            <label><input type="radio" name="q2" value="A"> A. Bandung</label><br>
-            <label><input type="radio" name="q2" value="B"> B. Jakarta</label><br>
-            <label><input type="radio" name="q2" value="C"> C. Surabaya</label>
-        </div>
-    {% else %}
-        <p>Quiz tidak ditemukan.</p>
-    {% endif %}
-
-    <button type="submit">Kirim Jawaban</button>
-</form>
-
+            <button type="submit">Kirim Jawaban</button>
+        </form>
 
         <div id="result"></div>
     </main>

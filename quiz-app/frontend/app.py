@@ -1,22 +1,19 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from pymongo import MongoClient
 import bcrypt
-import os
 from questions_bank import get_questions
 
 app = Flask(__name__)
+app.secret_key = "admin123"  # Ganti di production
 
-
-app.secret_key = "admin123"  # Ganti dengan yang lebih aman di production
-
-# MongoDB Setup
+# MongoDB setup
 client = MongoClient("mongodb://localhost:27017/")
 db = client["eduquiz"]
-users_collection = db["users"]
+users = db["users"]
 
-@app.route('/')
+@app.route("/")
 def home():
-    return render_template('index.html')
+    return render_template("index.html")
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -24,14 +21,15 @@ def signup():
         username = request.form["username"]
         password = bcrypt.hashpw(request.form["password"].encode('utf-8'), bcrypt.gensalt())
 
-        if users_collection.find_one({"username": username}):
-            return "Username already exists"
-        
-        users_collection.insert_one({"username": username, "password": password})
-        return redirect(url_for("login"))
-    
-    return render_template("signup.html")
+        if users.find_one({"username": username}):
+            flash("Username already exists", "error")
+            return render_template("signup.html")
 
+        users.insert_one({"username": username, "password": password})
+        flash("Signup successful. Please login.", "success")
+        return redirect(url_for("login"))
+
+    return render_template("signup.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -39,28 +37,27 @@ def login():
         username = request.form["username"]
         password = request.form["password"].encode('utf-8')
 
-        user = users_collection.find_one({"username": username})
+        user = users.find_one({"username": username})
         if user and bcrypt.checkpw(password, user["password"]):
             session["username"] = username
             return redirect(url_for("home"))
-        return "Invalid username or password"
-    
-    return render_template("login.html")
+        flash("Invalid username or password", "error")
+        return render_template("login.html")
 
+    return render_template("login.html")
 
 @app.route("/logout")
 def logout():
     session.clear()
     return redirect(url_for("home"))
 
-
-# Lindungi akses ke quiz
 @app.route("/quiz/<category>")
 def quiz(category):
     if 'username' not in session:
         return redirect(url_for("login"))
-    # Ambil soal dari database atau questions_bank.py
-    return render_template("quiz.html", category=category)
+
+    questions = get_questions(category)
+    return render_template("quiz.html", category=category, questions=questions)
 
 if __name__ == "__main__":
     app.run(debug=True)

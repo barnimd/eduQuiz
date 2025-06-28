@@ -360,46 +360,61 @@ header {
 }
 
 /*login and signup styles */
-.auth-container {
+.form-container {
     max-width: 400px;
     margin: 80px auto;
     padding: 30px;
-    background: white;
+    background: #ffffff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    text-align: center;
+    text-align: left;
 }
 
-.auth-container h2 {
+.form-container h2 {
+    text-align: center;
     margin-bottom: 20px;
 }
 
-.auth-container input {
-    display: block;
+.form-container input {
     width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
+    border-radius: 8px;
 }
 
-.auth-container button {
+.form-container button {
     width: 100%;
     padding: 12px;
     background-color: #3b82f6;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s;
 }
 
-.auth-container button:hover {
+.form-container button:hover {
     background-color: #2563eb;
 }
+/* Flash Messages */
+.flash-messages {
+  list-style: none;
+  padding: 10px;
+  margin: 10px auto;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+}
 
-.auth-container p {
-    margin-top: 15px;
-    font-size: 0.9rem;
+.flash-messages .error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.flash-messages .success {
+  background-color: #d4edda;
+  color: #155724;
 }

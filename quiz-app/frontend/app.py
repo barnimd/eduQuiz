@@ -4,14 +4,15 @@ import bcrypt
 import os
 from questions_bank import get_questions
 
-app = Flask(__name__, template_folder='../templates', static_folder='../static')
+app = Flask(__name__)
 
 
 app.secret_key = "admin123"  # Ganti dengan yang lebih aman di production
 
-client = MongoClient("mongodb://localhost:27017/")  # atau URI Mongo Atlas
-db = client.eduquiz
-users = db.users
+# MongoDB Setup
+client = MongoClient("mongodb://localhost:27017/")
+db = client["eduquiz"]
+users_collection = db["users"]
 
 @app.route('/')
 def home():
@@ -23,10 +24,10 @@ def signup():
         username = request.form["username"]
         password = bcrypt.hashpw(request.form["password"].encode('utf-8'), bcrypt.gensalt())
 
-        if users.find_one({"username": username}):
+        if users_collection.find_one({"username": username}):
             return "Username already exists"
         
-        users.insert_one({"username": username, "password": password})
+        users_collection.insert_one({"username": username, "password": password})
         return redirect(url_for("login"))
     
     return render_template("signup.html")
@@ -38,7 +39,7 @@ def login():
         username = request.form["username"]
         password = request.form["password"].encode('utf-8')
 
-        user = users.find_one({"username": username})
+        user = users_collection.find_one({"username": username})
         if user and bcrypt.checkpw(password, user["password"]):
             session["username"] = username
             return redirect(url_for("home"))
@@ -61,5 +62,5 @@ def quiz(category):
     # Ambil soal dari database atau questions_bank.py
     return render_template("quiz.html", category=category)
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+if __name__ == "__main__":
+    app.run(debug=True)

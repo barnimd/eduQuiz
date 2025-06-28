@@ -41,42 +41,32 @@ function startQuiz() {
   const path = window.location.pathname;
   const category = path.split("/")[2];
 
-  const correctAnswers = {
+const correctAnswers = {
     math: {
-      q1: 'A',
-      q2: 'B',
-      q3: 'A',
-      q4: 'B',
-      q5: 'C',
-      q6: 'A',
-      q7: 'A',
-      q8: 'B',
-      q9: 'B',
-      q10: 'A'
+      q1: "A", q2: "B", q3: "A", q4: "B", q5: "C",
+      q6: "A", q7: "A", q8: "B", q9: "B", q10: "A",
+      q11: "C", q12: "A", q13: "A", q14: "A", q15: "A",
+      q16: "A", // dikoreksi dari "C"
+      q17: "B", q18: "B", q19: "B", q20: "A",
+      q21: "B", q22: "B", q23: "A", q24: "A", q25: "B",
+      q26: "C", q27: "C", // dikoreksi dari "B"
+      q28: "B", q29: "A", q30: "A"
     },
     animals: {
-      q1: 'B',
-      q2: 'B',
-      q3: 'A',
-      q4: 'B',
-      q5: 'C',
-      q6: 'A',
-      q7: 'B',
-      q8: 'A',
-      q9: 'B',
-      q10: 'B'
+      q1: "B", q2: "B", q3: "A", q4: "B", q5: "C",
+      q6: "A", q7: "B", q8: "A", q9: "B", q10: "B",
+      q11: "A", q12: "A", q13: "A", q14: "A", q15: "A",
+      q16: "A", q17: "B", q18: "B", q19: "B", q20: "B",
+      q21: "A", q22: "A", q23: "B", q24: "B", q25: "A",
+      q26: "B", q27: "A", q28: "A", q29: "B", q30: "A"
     },
     places: {
-      q1: 'B',
-      q2: 'A',
-      q3: 'A',
-      q4: 'B',
-      q5: 'B',
-      q6: 'A',
-      q7: 'B',
-      q8: 'B',
-      q9: 'A',
-      q10: 'A'
+      q1: 'B', q2: 'A', q3: 'A', q4: 'B', q5: 'B',
+      q6: 'A', q7: 'B', q8: 'B', q9: 'A', q10: 'A',
+      q11: 'A', q12: 'B', q13: 'A', q14: 'B', q15: 'A',
+      q16: 'B', q17: 'B', q18: 'A', q19: 'A', q20: 'C',
+      q21: 'A', q22: 'A', q23: 'A', q24: 'C', q25: 'B',
+      q26: 'A', q27: 'A', q28: 'A', q29: 'A', q30: 'A'
     }
   };
 

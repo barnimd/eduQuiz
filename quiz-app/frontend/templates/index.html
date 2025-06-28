@@ -10,6 +10,7 @@
 <body>
     <header>
         <div class="logo"><a href="{{ url_for('home') }}">eduQuiz</a></div>
+        
         <nav class="navbar">
             <div class="dropdown">
                 <button class="dropbtn">Quiz Kategori ▼</button>
@@ -19,8 +20,22 @@
                     <a href="/quiz/places">Tebak Lokasi</a>
                 </div>
             </div>
+        
+            {% if session.get('username') %}
+                <div class="auth-links">
+                    <span>Hi, {{ session['username'] }}</span>
+                    <a href="{{ url_for('logout') }}" class="btn-auth logout">Logout</a>
+                </div>
+            {% else %}
+                <div class="auth-links">
+                    <a href="{{ url_for('login') }}" class="btn-auth">Login</a>
+                    <a href="{{ url_for('signup') }}" class="btn-auth">Signup</a>
+                </div>
+            {% endif %}
         </nav>
     </header>
+
+
 
     <main class="homepage-container">
 

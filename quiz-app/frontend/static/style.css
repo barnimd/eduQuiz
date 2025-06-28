@@ -418,3 +418,35 @@ header {
   background-color: #d4edda;
   color: #155724;
 }
+
+/* auth css login di homepage */
+.auth-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.btn-auth {
+  padding: 6px 12px;
+  background-color: white;
+  color: #3b82f6;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s, color 0.3s;
+}
+
+.btn-auth:hover {
+  background-color: #2563eb;
+  color: white;
+}
+
+.logout {
+  background-color: #ef4444;
+  color: white;
+}
+
+.logout:hover {
+  background-color: #dc2626;
+}

@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Fungsi countdown awal 3..2..1
+//countdown awal
 function showStartCountdown(callback) {
   const countdownOverlay = document.getElementById("start-countdown");
   const countdownNumber = document.getElementById("countdown-number");
@@ -18,7 +18,7 @@ function showStartCountdown(callback) {
     if (count === 0) {
       clearInterval(interval);
       countdownOverlay.style.display = 'none';
-      callback(); // lanjut ke quiz
+      callback();
     } else {
       countdownNumber.textContent = count;
     }
@@ -42,10 +42,44 @@ function startQuiz() {
   const category = path.split("/")[2];
 
   const correctAnswers = {
-    math: { q1: 'B', q2: 'A' },
-    animals: { q1: 'B', q2: 'B' },
-    places: { q1: 'C', q2: 'B' }
+    math: {
+      q1: 'A',
+      q2: 'B',
+      q3: 'A',
+      q4: 'B',
+      q5: 'C',
+      q6: 'A',
+      q7: 'A',
+      q8: 'B',
+      q9: 'B',
+      q10: 'A'
+    },
+    animals: {
+      q1: 'B',
+      q2: 'B',
+      q3: 'A',
+      q4: 'B',
+      q5: 'C',
+      q6: 'A',
+      q7: 'B',
+      q8: 'A',
+      q9: 'B',
+      q10: 'B'
+    },
+    places: {
+      q1: 'B',
+      q2: 'A',
+      q3: 'A',
+      q4: 'B',
+      q5: 'B',
+      q6: 'A',
+      q7: 'B',
+      q8: 'B',
+      q9: 'A',
+      q10: 'A'
+    }
   };
+
 
   function showQuestion(index) {
     const question = quizData[index];
@@ -81,7 +115,7 @@ function startQuiz() {
       }
     }, 1000);
 
-    // Tampilkan tombol setelah 3 detik
+    // tombol setelah 3 detik
     showButtonTimer = setTimeout(() => {
       nextBtn.style.display = "inline-block";
     }, 3000);
@@ -119,7 +153,6 @@ function startQuiz() {
   showQuestion(currentIndex);
 }
 
-// ========== Slideshow (jika kamu gunakan di halaman lain) ==========
 
 const slides = document.querySelectorAll('.slide');
 let current = 0;
@@ -156,10 +189,3 @@ if (nextSlideBtn && prevSlideBtn) {
 }
 
 
-// Tampilkan hasil
-resultDiv.innerHTML = `
-    Kamu menjawab ${score} dari ${total} soal dengan benar.<br>
-    Skor kamu: <strong>${Math.round((score / total) * 100)}%</strong>
-`;
-
-document.getElementById("back-button").style.display = "inline-block";

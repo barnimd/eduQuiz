@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz - {{ category|capitalize }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        window.quizData = {{ questions | tojson | safe }};
+    </script>
     <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+    
 </head>
 <body>
     <header>
@@ -15,22 +19,27 @@
     <main class="quiz-container">
         <h2>{{ category|capitalize }} Quiz</h2>
 
-        <form id="quiz-form">
-            {% for question in questions %}
-            <div class="question-box">
-                <p>{{ loop.index }}. {{ question.text }}</p>
-                {% for opt in question.options %}
-                    <label>
-                        <input type="radio" name="{{ question.name }}" value="{{ opt[0] }}"> {{ opt[0] }}. {{ opt[1] }}
-                    </label><br>
-                {% endfor %}
-            </div>
-            {% endfor %}
+        <div id="start-countdown" class="countdown-overlay">
+            <div class="countdown-number" id="countdown-number">3</div>
+        </div>
 
-            <button type="submit">Kirim Jawaban</button>
-        </form>
+        <div id="quiz-container"></div>
+
+        <div id="timer-container">
+            ⏱ Waktu: <span id="countdown">10</span> detik
+        </div>
+
+        <button id="next-button" style="display: none;">Selanjutnya</button>
 
         <div id="result"></div>
+
+
+        <div id="result"></div>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="/" id="back-button" style="display:none;" class="back-button">Kembali ke Menu</a>
+        </div>
+
     </main>
 </body>
 </html>

@@ -1,7 +1,12 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for, session
+import os
 from questions_bank import get_questions
 
-app = Flask(__name__, template_folder='templates', static_folder='static')
+app = Flask(
+    __name__,
+    template_folder='frontend/templates',
+    static_folder='frontend/static'
+)
 
 @app.route('/')
 def home():

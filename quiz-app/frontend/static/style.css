@@ -477,3 +477,52 @@ header {
 .logout:hover {
   background-color: #dc2626;
 }
+
+/* Leaderboard carousel styles */
+.leaderboard-carousel {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 40px auto;
+    overflow: hidden;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.carousel-track-leaderboard {
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+}
+
+.slide-leaderboard {
+    min-width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: none;
+}
+
+.slide-leaderboard.active {
+    display: block;
+}
+
+.buttons-leaderboard {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 30px;
+}
+
+.buttons-leaderboard button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buttons-leaderboard button:hover {
+    background-color: #357ab8;
+}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,31 +8,32 @@
     <script src="{{ url_for('static', filename='script.js') }}" defer></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
     <header>
         <div class="left-section">
-          <div class="logo">
-            <a href="{{ url_for('home') }}">eduQuiz</a>
+            <div class="logo">
+                <a href="{{ url_for('home') }}">eduQuiz</a>
             </div>
             <div class="dropdown">
-              <button class="dropbtn">Quiz Kategori ▼</button>
-                    <div class="dropdown-content">
-                      <a href="/quiz/math">Matematika</a>
-                      <a href="/quiz/animals">Tebak Hewan</a>
-                      <a href="/quiz/places">Tebak Lokasi</a>
-                      </div>
+                <button class="dropbtn">Quiz Kategori ▼</button>
+                <div class="dropdown-content">
+                    <a href="/quiz/math">Matematika</a>
+                    <a href="/quiz/animals">Tebak Hewan</a>
+                    <a href="/quiz/places">Tebak Lokasi</a>
+                </div>
             </div>
         </div>
 
         <div class="right-section">
-          {% if session.get('username') %}
+            {% if session.get('username') %}
             <div class="auth-links">
-              <span>Hi, {{ session['username'] }}</span>
-              <a href="{{ url_for('logout') }}" class="btn-auth logout">Logout</a>
+                <span>Hi, {{ session['username'] }}</span>
+                <a href="{{ url_for('logout') }}" class="btn-auth logout">Logout</a>
             </div>
-          {% else %}
+            {% else %}
             <div class="auth-links">
-              <a href="{{ url_for('login') }}" class="btn-auth">Login</a>
+                <a href="{{ url_for('login') }}" class="btn-auth">Login</a>
                 <a href="{{ url_for('signup') }}" class="btn-auth">Signup</a>
             </div>
             {% endif %}
@@ -62,26 +64,96 @@
 
 
             <div class="buttons">
-              <button id="prevBtn">&#10094;</button>
-              <button id="nextBtn">&#10095;</button>
+                <button id="prevBtn">&#10094;</button>
+                <button id="nextBtn">&#10095;</button>
             </div>
         </div>
 
-    <div class="bottom-section">
-        <div class="leaderboard">
-            <h3>🏆 Leaderboard</h3>
-            <ol>
-                <li>Budi - 90%</li>
-                <li>Santi - 85%</li>
-                <li>Ali - 80%</li>
-            </ol>
-        </div>
+        <div class="bottom-section">
+            <div class="leaderboard-carousel">
+                <div class="carousel-track-leaderboard">
+                    <!-- Slide 1 - Math -->
+                    <div class="slide-leaderboard active">
+                        <h3>🏆 Leaderboard - Matematika</h3>
+                        <ol>
+                            {% for entry in leaderboard_math %}
+                                <li>{{ entry.username }} - {{ entry.score }}%</li>
+                            {% endfor %}
+                            {% if extra_math %}
+                                <li style="color: gray;">{{ extra_math.username }} - {{ extra_math.score }}%</li>
+                            {% endif %}
+                        </ol>
+                    </div>
 
-        <div class="lorem-text">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+                    <!-- Slide 2 - Animals -->
+                    <div class="slide-leaderboard">
+                        <h3>🐾 Leaderboard - Tebak Hewan</h3>
+                        <ol>
+                            {% for entry in leaderboard_animals %}
+                                <li>{{ entry.username }} - {{ entry.score }}%</li>
+                            {% endfor %}
+                            {% if extra_animals %}
+                                <li style="color: gray;">{{ extra_animals.username }} - {{ extra_animals.score }}%</li>
+                            {% endif %}
+                        </ol>
+                    </div>
+
+                    <!-- Slide 3 - Places -->
+                    <div class="slide-leaderboard">
+                        <h3>🌍 Leaderboard - Lokasi</h3>
+                        <ol>
+                            {% for entry in leaderboard_places %}
+                                <li>{{ entry.username }} - {{ entry.score }}%</li>
+                            {% endfor %}
+                            {% if extra_places %}
+                                <li style="color: gray;">{{ extra_places.username }} - {{ extra_places.score }}%</li>
+                            {% endif %}
+                        </ol>
+                    </div>
+                </div>
+            
+                <div class="buttons-leaderboard">
+                    <button id="prevLeaderboard">&#10094;</button>
+                    <button id="nextLeaderboard">&#10095;</button>
+                </div>
+            </div>
+
+
+            <div class="lorem-text">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+            </div>
         </div>
-    </div>
-</main>
+    </main>
+<script>
+    const slidesleaderboard = document.querySelectorAll('.slide-leaderboard');
+    const nextleaderboardBtn = document.getElementById('nextLeaderboard');
+    const prevleaderboardBtn = document.getElementById('prevLeaderboard');
+
+    let currentIndexleaderboard = 0;
+
+    function updateSlide() {
+        slidesleaderboard.forEach((slidesleaderboard, index) => {
+            slidesleaderboard.classList.remove('active');
+            if (index === currentIndexleaderboard) {
+                slidesleaderboard.classList.add('active');
+            }
+        });
+    }
+
+    nextleaderboardBtn.addEventListener('click', () => {
+        currentIndexleaderboard = (currentIndexleaderboard + 1) % slides.length;
+        updateSlide();
+    });
+
+    prevleaderboardBtn.addEventListener('click', () => {
+        currentIndexleaderboard = (currentIndexleaderboard - 1 + slides.length) % slides.length;
+        updateSlide();
+    });
+
+    // Set awal
+    updateSlide();
+</script>
 
 </body>
+
 </html>

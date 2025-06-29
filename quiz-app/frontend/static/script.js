@@ -123,16 +123,36 @@ const correctAnswers = {
     if (currentIndex < quizData.length) {
       showQuestion(currentIndex);
     } else {
-      container.innerHTML = "";
-      document.getElementById("timer-container").style.display = "none";
-      nextBtn.style.display = "none";
-      resultDiv.innerHTML = `
-        <h3>Kuis Selesai!</h3>
-        <p>Kamu menjawab ${score} dari ${quizData.length} soal dengan benar.</p>
-        <strong>Skor kamu: ${Math.round((score / quizData.length) * 100)}%</strong>
-      `;
-      backBtn.style.display = "inline-block";
+  container.innerHTML = "";
+  document.getElementById("timer-container").style.display = "none";
+  nextBtn.style.display = "none";
+  const finalScore = Math.round((score / quizData.length) * 100);
+  resultDiv.innerHTML = `
+    <h3>Kuis Selesai!</h3>
+    <p>Kamu menjawab ${score} dari ${quizData.length} soal dengan benar.</p>
+    <strong>Skor kamu: ${finalScore}%</strong>
+  `;
+  backBtn.style.display = "inline-block";
+
+  // Kirim skor ke server
+  fetch("/submit-score", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      category: category,
+      score: finalScore
+    })
+  })
+  .then(res => {
+    if (!res.ok) {
+      console.error("Gagal menyimpan skor");
     }
+  })
+  .catch(err => console.error("Fetch error:", err));
+}
+
   }
 
   nextBtn.addEventListener("click", () => {
@@ -177,5 +197,4 @@ if (nextSlideBtn && prevSlideBtn) {
 
   updateSlides();
 }
-
 

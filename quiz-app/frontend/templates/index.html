@@ -119,9 +119,18 @@
             </div>
 
 
-            <div class="lorem-text">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
+            {% if stats %}
+            <div class="user-stats">
+                <h3>📊 Statistik Kamu</h3>
+                <ul>
+                    <li>Total kuis yang dikerjakan: {{ stats.total_quiz }}</li>
+                    <li>Kategori favorit: {{ stats.favorite_category | capitalize }}</li>
+                    <li>Rata-rata skor: {{ stats.average_score }}%</li>
+                    <li>Skor tertinggi: {{ stats.highest_score }}% ({{ stats.highest_category | capitalize }})</li>
+                </ul>
             </div>
+            {% endif %}
+
         </div>
     </main>
 <script>

@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from pymongo import MongoClient
 import bcrypt
 from questions_bank import get_questions
+from collections import Counter
 
 app = Flask(__name__)
 app.secret_key = "admin123"  # Ganti di production
@@ -14,19 +15,23 @@ scores_collection = db["scores"]
 
 @app.route("/")
 def home():
-    username = session.get("username")
-
-    leaderboard_math, extra_math = get_leaderboard("math", username)
-    leaderboard_animals, extra_animals = get_leaderboard("animals", username)
-    leaderboard_places, extra_places = get_leaderboard("places", username)
+    stats = None
+    if "username" in session:
+        stats = get_user_stats(session["username"])
+    
+    leaderboard_math, extra_math = get_leaderboard("math", session.get("username"))
+    leaderboard_animals, extra_animals = get_leaderboard("animals", session.get("username"))
+    leaderboard_places, extra_places = get_leaderboard("places", session.get("username"))
 
     return render_template("index.html",
+                           stats=stats,
                            leaderboard_math=leaderboard_math,
-                           extra_math=extra_math,
                            leaderboard_animals=leaderboard_animals,
-                           extra_animals=extra_animals,
                            leaderboard_places=leaderboard_places,
+                           extra_math=extra_math,
+                           extra_animals=extra_animals,
                            extra_places=extra_places)
+
 
 
 
@@ -91,14 +96,28 @@ def submit_score():
     score = data.get("score")
     username = session["username"]
 
-    # Simpan skor ke MongoDB
-    scores_collection.insert_one({
+    # Cek apakah sudah ada skor sebelumnya untuk user + kategori
+    existing_score = scores_collection.find_one({
         "username": username,
-        "category": category,
-        "score": score
+        "category": category
     })
 
-    return {"message": "Score saved successfully"}, 200
+    if existing_score:
+        # Jika skor baru lebih tinggi, update
+        if score > existing_score["score"]:
+            scores_collection.update_one(
+                {"_id": existing_score["_id"]},
+                {"$set": {"score": score}}
+            )
+    else:
+        # Jika belum ada, insert
+        scores_collection.insert_one({
+            "username": username,
+            "category": category,
+            "score": score
+        })
+
+    return {"message": "Score processed"}, 200
 
 
 def simpan_skor(username, category, score):
@@ -126,6 +145,39 @@ def get_leaderboard(category, current_user=None):
             user_score = None  # Tidak perlu ditampilkan terpisah
 
     return top_scores, user_score
+
+def get_user_stats(username):
+    user_scores = list(scores_collection.find({"username": username}))
+    if not user_scores:
+        return {
+            "total_quiz": 0,
+            "favorite_category": None,
+            "average_score": 0,
+            "highest_score": 0,
+            "highest_category": None
+        }
+
+    total_quiz = len(user_scores)
+
+    # Kategori favorit
+    categories = [entry["category"] for entry in user_scores]
+    favorite_category = Counter(categories).most_common(1)[0][0]
+
+    # Rata-rata skor
+    average_score = sum(entry["score"] for entry in user_scores) / total_quiz
+
+    # Skor tertinggi
+    highest_entry = max(user_scores, key=lambda x: x["score"])
+    highest_score = highest_entry["score"]
+    highest_category = highest_entry["category"]
+
+    return {
+        "total_quiz": total_quiz,
+        "favorite_category": favorite_category,
+        "average_score": round(average_score, 2),
+        "highest_score": highest_score,
+        "highest_category": highest_category
+    }
 
 if __name__ == "__main__":
     app.run(debug=True)

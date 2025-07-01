@@ -37,6 +37,9 @@ function startQuiz() {
   let score = 0;
   let timer;
   let showButtonTimer;
+  
+  let userAnswers = [];
+
 
   const path = window.location.pathname;
   const category = path.split("/")[2];
@@ -181,48 +184,79 @@ const correctAnswers = {
     }, 3000);
   }
 
-  function handleNext() {
+function handleNext() {
     const selected = document.querySelector('input[name="' + quizData[currentIndex].name + '"]:checked');
     const correct = correctAnswers[category];
 
-    if (selected && selected.value === correct[quizData[currentIndex].name]) {
-      score++;
-    }
+    let userAnswer = selected ? selected.value : "Tidak Dijawab";
+    let correctAnswer = correct[quizData[currentIndex].name];
+    let isCorrect = userAnswer === correctAnswer;
+
+    if (isCorrect) score++;
+
+    userAnswers.push({
+      question: quizData[currentIndex].text,
+      userAnswer: userAnswer,
+      correctAnswer: correctAnswer,
+      isCorrect: isCorrect
+    });
 
     currentIndex++;
     if (currentIndex < quizData.length) {
       showQuestion(currentIndex);
     } else {
-  container.innerHTML = "";
-  document.getElementById("timer-container").style.display = "none";
-  nextBtn.style.display = "none";
-  const finalScore = Math.round((score / quizData.length) * 100);
-  resultDiv.innerHTML = `
-    <h3>Kuis Selesai!</h3>
-    <p>Kamu menjawab ${score} dari ${quizData.length} soal dengan benar.</p>
-    <strong>Skor kamu: ${finalScore}%</strong>
-  `;
-  backBtn.style.display = "inline-block";
-
-  // Kirim skor ke server
-  fetch("/submit-score", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      category: category,
-      score: finalScore
-    })
-  })
-  .then(res => {
-    if (!res.ok) {
-      console.error("Gagal menyimpan skor");
+      showResult();
     }
-  })
-  .catch(err => console.error("Fetch error:", err));
-}
+  }
 
+  function showResult() {
+    container.innerHTML = "";
+    document.getElementById("timer-container").style.display = "none";
+    nextBtn.style.display = "none";
+
+    const finalScore = Math.round((score / quizData.length) * 100);
+
+    let answerReview = userAnswers.map((answer, idx) => {
+      let status = answer.isCorrect ? "✅ Benar" : "❌ Salah";
+      let userDisplay = answer.userAnswer === "Tidak Dijawab" ? "<i>Tidak Dijawab</i>" : answer.userAnswer;
+
+      return `
+        <div class="review-item">
+          <strong>${idx + 1}. ${answer.question}</strong><br>
+          Jawaban kamu: ${userDisplay}<br>
+          Jawaban benar: ${answer.correctAnswer}<br>
+          <span style="color:${answer.isCorrect ? 'green' : 'red'}">${status}</span>
+          <hr>
+        </div>
+      `;
+    }).join("");
+
+    resultDiv.innerHTML = `
+      <h3>Kuis Selesai!</h3>
+      <p>Kamu menjawab ${score} dari ${quizData.length} soal dengan benar.</p>
+      <strong>Skor kamu: ${finalScore}%</strong>
+      <h4>Review Jawaban:</h4>
+      ${answerReview}
+    `;
+
+    backBtn.style.display = "inline-block";
+
+    fetch("/submit-score", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        category: category,
+        score: finalScore
+      })
+    })
+      .then(res => {
+        if (!res.ok) {
+          console.error("Gagal menyimpan skor");
+        }
+      })
+      .catch(err => console.error("Fetch error:", err));
   }
 
   nextBtn.addEventListener("click", () => {
@@ -232,7 +266,6 @@ const correctAnswers = {
 
   showQuestion(currentIndex);
 }
-
 
 const slides = document.querySelectorAll('.slide');
 let current = 0;

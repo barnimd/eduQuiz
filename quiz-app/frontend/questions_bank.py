@@ -109,7 +109,6 @@ def get_questions(category):
         questions = all_questions[category][:]
         random.shuffle(questions)  # Acak urutan soal
         limited = questions[:10]   # Ambil 10 soal saja
-        for idx, q in enumerate(limited):
-            q["name"] = f"q{idx+1}"  # Ganti nama q1-q10 biar sinkron
-        return limited
+        return limited  # Tidak ubah q["name"] agar cocok dengan correctAnswers
     return []
+

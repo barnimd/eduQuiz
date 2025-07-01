@@ -546,3 +546,76 @@ header {
 .user-stats li {
     margin-bottom: 8px;
 }
+/* fotter style */
+.site-footer {
+  background-color: #2e002e;
+  color: #f9f9f9;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.footer-left h2.brand {
+  color: #ff66c4;
+  margin-bottom: 10px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 40px;
+}
+
+.footer-links h4 {
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links ul li a {
+  text-decoration: none;
+  color: #ccc;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.footer-links ul li a:hover {
+  color: #fff;
+}
+
+.footer-apps img {
+  height: 45px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.social-icons img {
+  width: 28px;
+  margin-left: 10px;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #444;
+  margin: 20px 0;
+}

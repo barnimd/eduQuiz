@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   showStartCountdown(() => {
-    startQuiz(); // mulai quiz setelah countdown
+    startQuiz(); 
   });
 });
 
@@ -46,7 +46,7 @@ function startQuiz() {
 
 const correctAnswers = {
     math: {
-      q1: "A",  // Koreksi: 3x=12 -> x=4. Maka x+2 = 6.
+      q1: "A",  
       q2: "B",
       q3: "A",
       q4: "B",
@@ -61,7 +61,7 @@ const correctAnswers = {
       q13: "A",
       q14: "A",
       q15: "A",
-      q16: "A",  // Benar. Sisa bagi 10 dengan 3 adalah 1.
+      q16: "A",  
       q17: "B",
       q18: "B",
       q19: "B",
@@ -72,7 +72,7 @@ const correctAnswers = {
       q24: "A",
       q25: "B",
       q26: "C",
-      q27: "B",  // Koreksi: Sisa bagi 22 dengan 5 adalah 2.
+      q27: "B",  
       q28: "B",
       q29: "A",
       q30: "A"
@@ -160,29 +160,38 @@ const correctAnswers = {
     nextBtn.style.display = "none";
     startQuestionTimer();
   }
+  
 
   function startQuestionTimer() {
     let timeLeft = 10;
     countdownEl.textContent = timeLeft;
 
+    const progressBar = document.getElementById("progress-bar");
+    progressBar.style.width = "100%";
+
     clearInterval(timer);
     clearTimeout(showButtonTimer);
 
     timer = setInterval(() => {
-      timeLeft--;
-      countdownEl.textContent = timeLeft;
+        timeLeft--;
+        countdownEl.textContent = timeLeft;
 
-      if (timeLeft <= 0) {
-        clearInterval(timer);
-        handleNext();
-      }
+        const percentage = (timeLeft / 10) * 100;
+        progressBar.style.width = `${percentage}%`;
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            progressBar.style.width = "0%";
+            handleNext();
+        }
     }, 1000);
 
-    // tombol setelah 3 detik
+    // tombol muncul setelah 3 detik
     showButtonTimer = setTimeout(() => {
-      nextBtn.style.display = "inline-block";
+        nextBtn.style.display = "inline-block";
     }, 3000);
-  }
+}
+
 
 function handleNext() {
     const selected = document.querySelector('input[name="' + quizData[currentIndex].name + '"]:checked');

@@ -140,14 +140,17 @@ header {
     background-color: #f9f9f9;
     padding: 20px;
     margin-bottom: 20px;
-    border-left: 5px solid #4a90e2;
-    border-radius: 10px;
+    border-left: 6px solid #4a90e2;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
+    position: relative;
 }
 
 .question-box:hover {
-    background-color: #f1f7ff;
+    background-color: #eef6ff;
 }
+
 
 /* Teks pertanyaan */
 .question-box p {
@@ -166,7 +169,11 @@ header {
 
 .question-box input[type="radio"] {
     margin-right: 10px;
+    accent-color: #4a90e2;
+    transform: scale(1.2);
+    cursor: pointer;
 }
+
 
 /* Tombol Submit */
 #quiz-form button {
@@ -265,7 +272,7 @@ header {
       object-fit: cover;
       box-shadow: 0 8px 30px rgba(0,0,0,0.5);
     }
-
+    
     .quiz-button {
     position: absolute;
     bottom: 20px;
@@ -286,6 +293,29 @@ header {
         background-color: #357ab8;
     }
 
+    #next-button {
+        display: block;
+        margin: 30px auto 0 auto;
+        background-color: #4a90e2;
+        color: white;
+        padding: 14px 28px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    #next-button:hover {
+        background-color: #357ab8;
+        transform: translateY(-2px);
+    }
+
+    #next-button:active {
+        transform: scale(0.98);
+    }
 
     .slide.active {
       opacity: 1;
@@ -340,6 +370,24 @@ header {
     font-weight: bold;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+
+.progress-bar-wrapper {
+    margin-top: 8px;
+    width: 200px;
+    height: 10px;
+    background-color: #ffeeba;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+#progress-bar {
+    height: 100%;
+    width: 100%;
+    background-color: #f6ad55;
+    transition: width 0.3s linear;
+}
+
 
 .countdown-overlay {
     position: fixed;

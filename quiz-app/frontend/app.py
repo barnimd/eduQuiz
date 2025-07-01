@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.secret_key = "admin123"  # Ganti di production
 
 # MongoDB setup
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient("mongodb://host.docker.internal:27017/")
 db = client["eduquiz"]
 users = db["users"]
 scores_collection = db["scores"]

@@ -577,16 +577,19 @@ header {
 
 /* user statistic */
 .user-stats {
-    background-color: #e9f1ff;
+    background-color: #fefefe;
     padding: 20px;
-    border-radius: 10px;
     width: 45%;
+    border-radius: 10px;
+    text-align: left;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 0.95rem;
 }
 .user-stats h3 {
     margin-bottom: 15px;
 }
+
 .user-stats ul {
     list-style: none;
     padding-left: 0;

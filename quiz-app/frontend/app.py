@@ -3,6 +3,7 @@ from pymongo import MongoClient
 import bcrypt
 from questions_bank import get_questions
 from collections import Counter
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = "admin123"  # Ganti di production
@@ -121,11 +122,20 @@ def submit_score():
 
 
 def simpan_skor(username, category, score):
-    scores_collection.insert_one({
+    # 1. Simpan ke koleksi 'scores' untuk tracking history
+    db.scores.insert_one({
         "username": username,
         "category": category,
-        "score": score
+        "score": score,
+        "timestamp": datetime.utcnow()
     })
+
+    # 2. Update ke koleksi 'best_scores' hanya jika score baru lebih tinggi
+    db.best_scores.update_one(
+        {"username": username, "category": category},
+        {"$max": {"score": score}},
+        upsert=True
+    )
 
 def get_leaderboard(category, current_user=None):
     # Ambil 10 skor tertinggi untuk kategori tertentu
@@ -147,37 +157,34 @@ def get_leaderboard(category, current_user=None):
     return top_scores, user_score
 
 def get_user_stats(username):
-    user_scores = list(scores_collection.find({"username": username}))
-    if not user_scores:
-        return {
-            "total_quiz": 0,
-            "favorite_category": None,
-            "average_score": 0,
-            "highest_score": 0,
-            "highest_category": None
-        }
+    all_attempts = list(db.scores.find({"username": username}))
+    total_kuis = len(all_attempts)
 
-    total_quiz = len(user_scores)
+    # Hitung jumlah per kategori
+    from collections import Counter
+    kategori_count = Counter([a['category'] for a in all_attempts])
+    kategori_fav = kategori_count.most_common(1)[0][0] if kategori_count else None
 
-    # Kategori favorit
-    categories = [entry["category"] for entry in user_scores]
-    favorite_category = Counter(categories).most_common(1)[0][0]
+    # Hitung rata-rata
+    if all_attempts:
+        avg_score = sum(a['score'] for a in all_attempts) / len(all_attempts)
+    else:
+        avg_score = 0
 
-    # Rata-rata skor
-    average_score = sum(entry["score"] for entry in user_scores) / total_quiz
+    # Skor tertinggi dari best_scores
+    tertinggi = db.best_scores.find({"username": username}).sort("score", -1).limit(1)
+    tertinggi_list = list(tertinggi)
+    high_score_data = tertinggi_list[0] if tertinggi_list else None
 
-    # Skor tertinggi
-    highest_entry = max(user_scores, key=lambda x: x["score"])
-    highest_score = highest_entry["score"]
-    highest_category = highest_entry["category"]
 
     return {
-        "total_quiz": total_quiz,
-        "favorite_category": favorite_category,
-        "average_score": round(average_score, 2),
-        "highest_score": highest_score,
-        "highest_category": highest_category
+        "total_kuis": total_kuis,
+        "kategori_fav": kategori_fav,
+        "avg_score": round(avg_score, 2),
+        "skor_tertinggi": high_score_data["score"] if high_score_data else 0,
+        "kategori_tertinggi": high_score_data["category"] if high_score_data else "-"
     }
 
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")

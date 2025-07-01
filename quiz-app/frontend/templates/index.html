@@ -118,18 +118,19 @@
                 </div>
             </div>
 
-
-            {% if stats %}
+                    
             <div class="user-stats">
                 <h3>📊 Statistik Kamu</h3>
-                <ul>
-                    <li>Total kuis yang dikerjakan: {{ stats.total_quiz }}</li>
-                    <li>Kategori favorit: {{ stats.favorite_category | capitalize }}</li>
-                    <li>Rata-rata skor: {{ stats.average_score }}%</li>
-                    <li>Skor tertinggi: {{ stats.highest_score }}% ({{ stats.highest_category | capitalize }})</li>
-                </ul>
+                {% if user_stats %}
+                    <p><strong>Total Kuis Dikerjakan:</strong> {{ user_stats.total_quiz }}</p>
+                    <p><strong>Kategori Favorit:</strong> {{ user_stats.favorite_category|capitalize }}</p>
+                    <p><strong>Rata-rata Skor:</strong> {{ user_stats.average_score }}%</p>
+                    <p><strong>Skor Tertinggi:</strong> {{ user_stats.best_score }}% ({{ user_stats.best_category|capitalize }})</p>
+                {% else %}
+                    <p>Login untuk melihat statistik kamu!</p>
+                {% endif %}
             </div>
-            {% endif %}
+            
 
         </div>
     </main>

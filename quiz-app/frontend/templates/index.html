@@ -166,33 +166,48 @@
 </body>
 <footer class="site-footer">
   <div class="footer-top">
-    <div class="footer-left">
-      <h2 class="brand">📚 EduQuiz</h2>
-      <p class="small-text">2025 EduQuiz Inc.</p>
+
+    <!-- Kiri: Brand & Link Navigasi -->
+    <div class="footer-left-section">
+      <div class="footer-left">
+        <h2 class="brand">📚 EduQuiz</h2>
+        <p class="small-text">2025 EduQuiz Inc.</p>
+      </div>
+
+      <div class="footer-links">
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#">School & District</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">For Business</a></li>
+            <li><a href="#">Help Center</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="footer-links">
-      <div>
-        <h4>Explore</h4>
-        <ul>
-          <li><a href="#">School & District</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">For Business</a></li>
-          <li><a href="#">Help Center</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="#">Terms of Service</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-        </ul>
+    <!-- Tengah: Sosial Media -->
+    <div class="footer-social-section">
+      <p><strong>Follow us</strong></p>
+      <div class="social-icons">
+        <a href="#"><img src="{{ url_for('static', filename='logo/x.png') }}" alt="X"></a>
+        <a href="#"><img src="{{ url_for('static', filename='logo/fb.png') }}" alt="Facebook"></a>
+        <a href="#"><img src="{{ url_for('static', filename='logo/ig.png') }}" alt="Instagram"></a>
       </div>
     </div>
 
+    <!-- Kanan: App Store -->
     <div class="footer-apps">
-      <a href="#"><img src="{{ url_for('static', filename='google-play.png') }}" alt="Get it on Google Play"></a>
-      <a href="#"><img src="{{ url_for('static', filename='app-store.png') }}" alt="Download on the App Store"></a>
+      <a href="#"><img src="{{ url_for('static', filename='logo/appstore.png') }}" alt="Download on the App Store"></a>
+      <a href="#"><img src="{{ url_for('static', filename='logo/playstore.png') }}" alt="Get it on Google Play"></a>
     </div>
   </div>
 
@@ -200,13 +215,9 @@
 
   <div class="footer-bottom">
     <p>&copy; 2025 EduQuiz. All rights reserved.</p>
-    <div class="social-icons">
-      <a href="#"><img src="{{ url_for('static', filename='icon-instagram.png') }}" alt="Instagram"></a>
-      <a href="#"><img src="{{ url_for('static', filename='icon-facebook.png') }}" alt="Facebook"></a>
-      <a href="#"><img src="{{ url_for('static', filename='icon-x.png') }}" alt="Twitter/X"></a>
-    </div>
   </div>
 </footer>
+
 
 
 </html>

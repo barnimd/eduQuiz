@@ -548,7 +548,7 @@ header {
 }
 /* fotter style */
 .site-footer {
-  background-color: #2e002e;
+  background-color: #1a365d;
   color: #f9f9f9;
   padding: 40px 20px;
   font-family: Arial, sans-serif;
@@ -563,7 +563,7 @@ header {
 }
 
 .footer-left h2.brand {
-  color: #ff66c4;
+  color: #357ab8;
   margin-bottom: 10px;
 }
 
@@ -618,4 +618,105 @@ hr {
   height: 1px;
   background: #444;
   margin: 20px 0;
+}
+
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+/* Gabungan brand + links */
+.footer-left-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footer-left h2.brand {
+  color: #357ab8;
+  margin-bottom: 10px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 40px;
+}
+
+.footer-links h4 {
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links ul li a {
+  text-decoration: none;
+  color: #ccc;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.footer-links ul li a:hover {
+  color: #fff;
+}
+
+/* Social Media */
+.footer-social-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  color: white;
+}
+
+.footer-social-section p {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.social-icons img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+}
+
+/* App store button */
+.footer-apps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-apps img {
+  height: 45px;
+  display: block;
+}
+
+/* Footer bottom */
+.footer-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+  color: #f0f0f0;
 }

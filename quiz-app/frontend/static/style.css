@@ -214,8 +214,9 @@ header {
 .bottom-section {
     margin-top: 40px;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
 }
 
 .leaderboard {
@@ -575,28 +576,45 @@ header {
     background-color: #357ab8;
 }
 
-/* user statistic */
+/* User Stats Section */
 .user-stats {
-    background-color: #fefefe;
+    background-color: #f9f9f9;
     padding: 20px;
-    width: 45%;
-    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 12px;
     text-align: left;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    margin-left: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     font-size: 0.95rem;
+    margin: 20px auto;
+    transition: 0.3s;
 }
+
+.user-stats:hover {
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
 .user-stats h3 {
     margin-bottom: 15px;
+    font-size: 1.2rem;
+    color: #333;
 }
 
 .user-stats ul {
     list-style: none;
-    padding-left: 0;
+    padding: 0;
+    margin: 0;
 }
+
 .user-stats li {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    line-height: 1.5;
 }
+
+.user-stats li strong {
+    color: #555;
+}
+
 /* fotter style */
 .site-footer {
   background-color: #1a365d;

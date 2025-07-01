@@ -97,28 +97,11 @@ def submit_score():
     score = data.get("score")
     username = session["username"]
 
-    # Cek apakah sudah ada skor sebelumnya untuk user + kategori
-    existing_score = scores_collection.find_one({
-        "username": username,
-        "category": category
-    })
-
-    if existing_score:
-        # Jika skor baru lebih tinggi, update
-        if score > existing_score["score"]:
-            scores_collection.update_one(
-                {"_id": existing_score["_id"]},
-                {"$set": {"score": score}}
-            )
-    else:
-        # Jika belum ada, insert
-        scores_collection.insert_one({
-            "username": username,
-            "category": category,
-            "score": score
-        })
+    # Langsung panggil simpan_skor() agar keduanya tersimpan
+    simpan_skor(username, category, score)
 
     return {"message": "Score processed"}, 200
+
 
 
 def simpan_skor(username, category, score):
@@ -138,44 +121,42 @@ def simpan_skor(username, category, score):
     )
 
 def get_leaderboard(category, current_user=None):
-    # Ambil 10 skor tertinggi untuk kategori tertentu
-    top_scores = list(scores_collection.find(
+    # Ambil 10 skor tertinggi untuk kategori tertentu dari best_scores
+    top_scores = list(db.best_scores.find(
         {"category": category}
     ).sort("score", -1).limit(10))
 
     user_score = None
     if current_user:
-        user_score = scores_collection.find_one({
+        user_score = db.best_scores.find_one({
             "username": current_user,
             "category": category
         })
 
-        # Cek apakah user sudah masuk 10 besar
         if any(entry["username"] == current_user for entry in top_scores):
-            user_score = None  # Tidak perlu ditampilkan terpisah
+            user_score = None
 
     return top_scores, user_score
 
+
 def get_user_stats(username):
+    print("==[DEBUG]== Menjalankan get_user_stats untuk:", username)
+    all_attempts = list(db.scores.find({"username": username}))
+    print("==[DEBUG]== Jumlah skor ditemukan:", len(all_attempts))
     all_attempts = list(db.scores.find({"username": username}))
     total_kuis = len(all_attempts)
 
-    # Hitung jumlah per kategori
-    from collections import Counter
-    kategori_count = Counter([a['category'] for a in all_attempts])
+    kategori_count = Counter([a.get('category') for a in all_attempts if 'category' in a])
     kategori_fav = kategori_count.most_common(1)[0][0] if kategori_count else None
 
-    # Hitung rata-rata
     if all_attempts:
-        avg_score = sum(a['score'] for a in all_attempts) / len(all_attempts)
+        avg_score = sum(a.get('score', 0) for a in all_attempts) / len(all_attempts)
     else:
         avg_score = 0
 
-    # Skor tertinggi dari best_scores
     tertinggi = db.best_scores.find({"username": username}).sort("score", -1).limit(1)
     tertinggi_list = list(tertinggi)
     high_score_data = tertinggi_list[0] if tertinggi_list else None
-
 
     return {
         "total_kuis": total_kuis,
@@ -184,6 +165,7 @@ def get_user_stats(username):
         "skor_tertinggi": high_score_data["score"] if high_score_data else 0,
         "kategori_tertinggi": high_score_data["category"] if high_score_data else "-"
     }
+
 
 
 if __name__ == "__main__":

@@ -119,17 +119,22 @@
             </div>
 
                     
-            <div class="user-stats">
-                <h3>📊 Statistik Kamu</h3>
-                {% if user_stats %}
-                    <p><strong>Total Kuis Dikerjakan:</strong> {{ user_stats.total_quiz }}</p>
-                    <p><strong>Kategori Favorit:</strong> {{ user_stats.favorite_category|capitalize }}</p>
-                    <p><strong>Rata-rata Skor:</strong> {{ user_stats.average_score }}%</p>
-                    <p><strong>Skor Tertinggi:</strong> {{ user_stats.best_score }}% ({{ user_stats.best_category|capitalize }})</p>
-                {% else %}
-                    <p>Login untuk melihat statistik kamu!</p>
-                {% endif %}
-            </div>
+                    {% if stats %}
+                        <div class="user-stats">
+                            <h3>📊 Statistik Kamu</h3>
+                             <ul>
+                                <li><strong>Total Kuis:</strong> {{ stats.total_kuis }}</li>
+                                <li><strong>Kategori Favorit:</strong> {{ stats.kategori_fav }}</li>
+                                <li><strong>Rata-rata Skor:</strong> {{ stats.avg_score }}</li>
+                                <li><strong>Skor Tertinggi:</strong> {{ stats.skor_tertinggi }} ({{ stats.kategori_tertinggi }})</li>
+                            </ul>
+                        </div>
+                    {% else %}
+                        <div class="user-stats">
+                            <p>Login untuk melihat statistik kamu!</p> 
+                        </div>
+                    {% endif %}
+                      
             
 
         </div>

@@ -4,13 +4,11 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Quicksand', sans-serif;
     background-color: #f2f4f8;
     color: #333;
 }
-
 /* Header dan Navbar */
 header {
     display: flex;
@@ -25,7 +23,6 @@ header {
     align-items: center;
     gap: 20px; /* Jarak antara logo dan dropdown */
 }
-
 .right-section {
     display: flex;
     align-items: center;
@@ -37,18 +34,14 @@ header {
     font-weight: bold;
     color: #ffffff;
 }
-
 .logo a:visited {
     color: #ffffff;
     text-decoration: none;
 }
-
 .logo a:hover {
     text-decoration: underline;
     color: #021322;
 }
-
-
 .dropbtn {
     background-color: #4a90e2;
     color: white;
@@ -73,7 +66,6 @@ header {
     position: relative;
     display: inline-block;
 }
-
 .dropdown-content {
     display: none;
     position: absolute;
@@ -82,42 +74,34 @@ header {
     box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
     z-index: 1;
 }
-
 .dropdown-content a {
     color: #333;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
-
 .dropdown-content a:hover {
     background-color: #f0f0f0;
 }
-
 .dropdown:hover .dropdown-content {
     display: block;
 }
-
 .dropdown:hover .dropbtn {
     background-color: #357ab8;
 }
-
 /* Hero section */
 .hero {
     text-align: center;
     padding: 100px 20px;
 }
-
 .hero h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
 }
-
 .hero p {
     font-size: 1.2rem;
     color: #555;
 }
-
 /* Container utama untuk quiz */
 .quiz-container {
     max-width: 800px;
@@ -127,14 +111,12 @@ header {
     border-radius: 12px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
-
 .quiz-container h2 {
     text-align: center;
     font-size: 2rem;
     margin-bottom: 30px;
     color: #333;
 }
-
 /* Kotak tiap soal */
 .question-box {
     background-color: #f9f9f9;
@@ -146,18 +128,14 @@ header {
     transition: all 0.3s ease;
     position: relative;
 }
-
 .question-box:hover {
     background-color: #eef6ff;
 }
-
-
 /* Teks pertanyaan */
 .question-box p {
     font-weight: bold;
     margin-bottom: 10px;
 }
-
 /* Pilihan jawaban */
 .question-box label {
     display: block;
@@ -166,15 +144,12 @@ header {
     cursor: pointer;
     transition: color 0.2s ease;
 }
-
 .question-box input[type="radio"] {
     margin-right: 10px;
     accent-color: #4a90e2;
     transform: scale(1.2);
     cursor: pointer;
 }
-
-
 /* Tombol Submit */
 #quiz-form button {
     display: block;
@@ -190,11 +165,9 @@ header {
     margin-top: 20px;
     transition: background-color 0.3s ease;
 }
-
 #quiz-form button:hover {
     background-color: #357ab8;
 }
-
 /* Hasil jawaban */
 #result {
     text-align: center;
@@ -203,7 +176,6 @@ header {
     font-weight: bold;
     color: green;
 }
-
 .homepage-container {
     max-width: 1000px;
     margin: 0 auto;
@@ -218,7 +190,6 @@ header {
     gap: 30px;
     flex-wrap: wrap;
 }
-
 .leaderboard {
     background-color: #f0f0f0;
     padding: 20px;
@@ -227,18 +198,13 @@ header {
     text-align: left;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
-
 .lorem-text {
     width: 55%;
     text-align: left;
     font-size: 1rem;
     color: #333;
 }
-
-
-
 /* slideshow */
-
 .carousel {
       position: relative;
       width: 800px;
@@ -247,13 +213,11 @@ header {
       margin-left: 80px;
       justify-content: center;
     }
-
     .carousel-track {
       display: flex;
       transform-style: preserve-3d;
       transition: transform 0.8s ease;
     }
-
     .slide {
       min-width: 800px;
       height: 450px;
@@ -265,7 +229,6 @@ header {
       transform: scale(0.9) translateX(100px);
       z-index: 0;
     }
-
     .slide img {
       width: 100%;
       height: 100%;
@@ -273,7 +236,6 @@ header {
       object-fit: cover;
       box-shadow: 0 8px 30px rgba(0,0,0,0.5);
     }
-    
     .quiz-button {
     position: absolute;
     bottom: 20px;
@@ -289,11 +251,9 @@ header {
     transition: background-color 0.3s ease;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
-
     .quiz-button:hover {
         background-color: #357ab8;
     }
-
     #next-button {
         display: block;
         margin: 30px auto 0 auto;
@@ -308,34 +268,28 @@ header {
         transition: background-color 0.3s ease, transform 0.2s ease;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     }
-
     #next-button:hover {
         background-color: #357ab8;
         transform: translateY(-2px);
     }
-
     #next-button:active {
         transform: scale(0.98);
     }
-
     .slide.active {
       opacity: 1;
       transform: scale(1) translateX(0);
       z-index: 3;
     }
-
     .slide.prev {
       opacity: 0.5;
       transform: scale(0.85) translateX(-500px);
       z-index: 2;
     }
-
     .slide.next {
       opacity: 0.5;
       transform: scale(0.85) translateX(500px);
       z-index: 2;
     }
-
     .buttons {
       position: absolute;
       width: 100%;
@@ -344,7 +298,6 @@ header {
       justify-content: space-between;
       transform: translateY(-50%);
     }
-
     .buttons button {
       background: rgba(255,255,255,0.6);
       border: none;
@@ -354,11 +307,9 @@ header {
       font-size: 20px;
       transition: background 0.3s ease;
     }
-
     .buttons button:hover {
       background: rgba(255,255,255,0.9);
     }
-
     #timer-container {
     position: fixed;
     bottom: 20px;
@@ -371,7 +322,6 @@ header {
     font-weight: bold;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-
 .progress-bar-wrapper {
     margin-top: 8px;
     width: 200px;
@@ -381,15 +331,12 @@ header {
     overflow: hidden;
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
 }
-
 #progress-bar {
     height: 100%;
     width: 100%;
     background-color: #f6ad55;
     transition: width 0.3s linear;
 }
-
-
 .countdown-overlay {
     position: fixed;
     top: 0;
@@ -405,17 +352,14 @@ header {
     font-weight: bold;
     color: #333;
 }
-
 .countdown-number {
     animation: fade 1s ease-in-out;
 }
-
 @keyframes fade {
     0% { opacity: 0; transform: scale(0.5); }
     50% { opacity: 1; transform: scale(1.1); }
     100% { opacity: 0; transform: scale(1); }
 }
-
 .back-button {
     background-color: #007bff;
     color: white;
@@ -424,11 +368,9 @@ header {
     text-decoration: none;
     transition: background 0.3s ease;
 }
-
 .back-button:hover {
     background-color: #0056b3;
 }
-
 /*login and signup styles */
 .form-container {
     max-width: 400px;
@@ -439,12 +381,10 @@ header {
     border-radius: 10px;
     text-align: left;
 }
-
 .form-container h2 {
     text-align: center;
     margin-bottom: 20px;
 }
-
 .form-container input {
     width: 100%;
     padding: 10px;
@@ -452,7 +392,6 @@ header {
     border: 1px solid #ccc;
     border-radius: 8px;
 }
-
 .form-container button {
     width: 100%;
     padding: 12px;
@@ -463,7 +402,6 @@ header {
     font-weight: bold;
     cursor: pointer;
 }
-
 .form-container button:hover {
     background-color: #2563eb;
 }
@@ -478,17 +416,14 @@ header {
   font-weight: bold;
   text-align: center;
 }
-
 .flash-messages .error {
   background-color: #f8d7da;
   color: #721c24;
 }
-
 .flash-messages .success {
   background-color: #d4edda;
   color: #155724;
 }
-
 /* auth css login di homepage */
 .auth-links {
     display: flex;
@@ -496,13 +431,10 @@ header {
     gap: 10px;
     padding-left: 20px;
 }
-
 .auth-links span {
     color: white;
     margin-right: 10px;
 }
-
-
 .btn-auth {
   padding: 6px 12px;
   background-color: white;
@@ -512,21 +444,17 @@ header {
   font-weight: bold;
   transition: background 0.3s, color 0.3s;
 }
-
 .btn-auth:hover {
   background-color: #2563eb;
   color: white;
 }
-
 .logout {
   background-color: #ef4444;
   color: white;
 }
-
 .logout:hover {
   background-color: #dc2626;
 }
-
 /* Leaderboard carousel styles */
 .leaderboard-carousel {
     position: relative;
@@ -538,29 +466,24 @@ header {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-
 .carousel-track-leaderboard {
     display: flex;
     transition: transform 0.6s ease-in-out;
 }
-
 .slide-leaderboard {
     min-width: 100%;
     padding: 20px;
     box-sizing: border-box;
     display: none;
 }
-
 .slide-leaderboard.active {
     display: block;
 }
-
 .buttons-leaderboard {
     display: flex;
     justify-content: space-between;
     padding: 10px 30px;
 }
-
 .buttons-leaderboard button {
     background-color: #4a90e2;
     color: white;
@@ -571,11 +494,9 @@ header {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
 .buttons-leaderboard button:hover {
     background-color: #357ab8;
 }
-
 /* User Stats Section */
 .user-stats {
     background-color: #f9f9f9;
@@ -589,85 +510,70 @@ header {
     margin: 20px auto;
     transition: 0.3s;
 }
-
 .user-stats:hover {
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
 }
-
 .user-stats h3 {
     margin-bottom: 15px;
     font-size: 1.2rem;
     color: #333;
 }
-
 .user-stats ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-
 .user-stats li {
     margin-bottom: 10px;
     line-height: 1.5;
 }
-
 .user-stats li strong {
     color: #555;
 }
-
 /* fotter style */
 .site-footer {
   background-color: #1a365d;
   color: #f9f9f9;
   padding: 40px 20px;
-  font-family: Arial, sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-size: 14px;
 }
-
 .footer-top {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 40px;
 }
-
 .footer-left h2.brand {
   color: #357ab8;
   margin-bottom: 10px;
 }
-
 .footer-links {
   display: flex;
   gap: 40px;
 }
-
 .footer-links h4 {
   color: #fff;
   margin-bottom: 10px;
 }
-
 .footer-links ul {
   list-style: none;
   padding: 0;
 }
-
 .footer-links ul li a {
   text-decoration: none;
   color: #ccc;
   display: block;
   margin-bottom: 8px;
 }
-
 .footer-links ul li a:hover {
   color: #fff;
 }
-
 .footer-apps img {
   height: 45px;
   margin-bottom: 10px;
   display: block;
 }
-
 .footer-bottom {
   display: flex;
   justify-content: space-between;
@@ -676,20 +582,16 @@ header {
   flex-wrap: wrap;
   gap: 20px;
 }
-
 .social-icons img {
   width: 28px;
   margin-left: 10px;
 }
-
 hr {
   border: 0;
   height: 1px;
   background: #444;
   margin: 20px 0;
 }
-
-
 .footer-top {
   display: flex;
   justify-content: space-between;
@@ -697,45 +599,37 @@ hr {
   flex-wrap: wrap;
   gap: 40px;
 }
-
 /* Gabungan brand + links */
 .footer-left-section {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-
 .footer-left h2.brand {
   color: #357ab8;
   margin-bottom: 10px;
 }
-
 .footer-links {
   display: flex;
   gap: 40px;
 }
-
 .footer-links h4 {
   color: #fff;
   margin-bottom: 10px;
 }
-
 .footer-links ul {
   list-style: none;
   padding: 0;
 }
-
 .footer-links ul li a {
   text-decoration: none;
   color: #ccc;
   display: block;
   margin-bottom: 8px;
 }
-
 .footer-links ul li a:hover {
   color: #fff;
 }
-
 /* Social Media */
 .footer-social-section {
   display: flex;
@@ -744,41 +638,34 @@ hr {
   gap: 10px;
   color: white;
 }
-
 .footer-social-section p {
   font-weight: bold;
   margin-bottom: 5px;
 }
-
 .social-icons {
   display: flex;
   align-items: center;
   gap: 15px;
 }
-
 .social-icons img {
   width: 28px;
   height: 28px;
   object-fit: contain;
   transition: transform 0.3s ease;
 }
-
 .social-icons img:hover {
   transform: scale(1.1);
 }
-
 /* App store button */
 .footer-apps {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-
 .footer-apps img {
   height: 45px;
   display: block;
 }
-
 /* Footer bottom */
 .footer-bottom {
   display: flex;
@@ -788,4 +675,48 @@ hr {
   flex-wrap: wrap;
   gap: 20px;
   color: #f0f0f0;
+}
+
+.dropbtn {
+    background-color: #4a90e2;
+    color: white;
+    padding: 10px 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif; 
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-family: 'Quicksand', sans-serif; 
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease, padding-left 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: #f0f0f0;
+    padding-left: 20px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #357ab8;
 }

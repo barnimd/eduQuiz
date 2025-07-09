@@ -1,2 +1,2 @@
 # eduQuiz
-project dps sems 6
+midterm dps sems 6
